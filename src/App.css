@@ -1,18 +1,105 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+ }
 .App {
   text-align: center;
+  background-color: white; /* For browsers that do not support gradients */
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-
+button{
+  border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 10px;
+    background-color: #ff0178;
+    color: white;
+    padding: 5px
+}
+.codeblock{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-height: 350px
+}
+.code{
+  background-color: white;
+    color: #ff0178;
+    max-width: 60vw;
+    width: 60vw;
+    overflow: auto;
+    text-align: left;
+    max-height: 400px;
+    /* margin-top: 10px; */
+    padding: 30px;
+    border-width: 1px;
+    border-style: outset;
+    border-color: #FF0178;
+}
+.lang{
+  max-width: 10vw;
+    width: 10vw;
+    background-color: #f3bcd6;
+    color: #000000;
+    font-feature-settings: "smcp", "c2sc";
+    font-variant: all-small-caps;
+}
+.description{
+  max-width: 30vw;
+  width: 30vw;
+  text-align: left;
+  overflow: auto;
+  text-align: left;
+  border: #282c34;
+  border-width: 2px;
+  border-style: groove;
+  background-color: #ff0078;
+    color: white;
+    font-family: serif;
+    font-size: large;
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
+    text-align: center;
+    max-width: 50px;
+    max-height: 50px;
     animation: App-logo-spin infinite 20s linear;
+
   }
 }
+.inputcontainer{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-width: 2px;
+  border-style: double;
+  border-color: azure;
+  width:50vw;
+}
 
+.displayrecs{
+  padding: 20px;
+  border-width: 2px;
+  border-style: double;
+  border-color: azure;
+  width:50vw;
+  display: flex;
+  flex-direction: column;
+}
+.getbyinput{
+  padding: 10px;
+    margin-bottom: 20px;
+    font-size: medium;
+}
+.outercontainer{
+  display: flex;
+  flex-direction: row;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -34,5 +121,54 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+.title{
+  background-color: #f1efef;
+  color: #ff0078;
+}
+.loader{
+  background-color: #282c3428;
+  position: fixed;
+  height:100vh;
+  width:100vw;
+  z-index: 10;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .outercontainer{
+    flex-direction: column;
+  }
+  .inputcontainer{
+    width:100vw;
+  }
+  
+  .displayrecs{
+    width:100vw;
+  }
+  .codeblock{
+    flex-direction: column;
+  }
+  #lbtn{
+    width:10px;
+    max-width: 10px;
+  }
+  .code{
+      max-width: 100vw;
+      width: 100vw;
+      max-height: 2000px;
+      height:fit-content;
+  }
+  .lang{
+      max-width: 100vw;
+      width: 100vw;
+      margin-top: 30px;
+  }
+  .description{
+    max-width: 100vw;
+    width: 100vw;
   }
 }
