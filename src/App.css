@@ -5,7 +5,9 @@
  }
 .App {
   text-align: center;
-  background-color: white; /* For browsers that do not support gradients */
+  background-color: #e4e1e161;
+  margin-left: 5vw;
+  margin-right: 5vw;
 }
 
 .App-logo {
@@ -17,7 +19,7 @@ button{
     padding-left: 20px;
     padding-right: 20px;
     margin: 10px;
-    background-color: #ff0178;
+    background: #000000b5;
     color: white;
     padding: 5px
 }
@@ -28,10 +30,10 @@ button{
   max-height: 350px
 }
 .code{
-  background-color: white;
-    color: #ff0178;
-    max-width: 60vw;
-    width: 60vw;
+  background-color: black;
+    color: #ffffff;
+    max-width: 50vw;
+    width: 50vw;
     overflow: auto;
     text-align: left;
     max-height: 400px;
@@ -39,7 +41,8 @@ button{
     padding: 30px;
     border-width: 1px;
     border-style: outset;
-    border-color: #FF0178;
+    /* border-color: #FF0178; */
+    height: 200px;
 }
 .lang{
   max-width: 10vw;
@@ -49,19 +52,29 @@ button{
     font-feature-settings: "smcp", "c2sc";
     font-variant: all-small-caps;
 }
+.dlanguage{
+  width:10vw;
+  border: inset;
+}
+.dbtn{
+  
+    margin-left: 30px;
+}
+
 .description{
   max-width: 30vw;
-  width: 30vw;
-  text-align: left;
-  overflow: auto;
-  text-align: left;
-  border: #282c34;
-  border-width: 2px;
-  border-style: groove;
-  background-color: #ff0078;
-    color: white;
+    width: 20vw;
+    text-align: left;
+    overflow: auto;
+    text-align: left;
+    border: #282c34;
+    border-width: 2px;
+    border-style: groove;
+    background-color: #f4ecf0;
+    color: #1c1a1a;
     font-family: serif;
     font-size: large;
+    height: 200px;
 }
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -79,7 +92,7 @@ button{
   border-width: 2px;
   border-style: double;
   border-color: azure;
-  width:50vw;
+  width:100vw;
 }
 
 .displayrecs{
@@ -87,7 +100,7 @@ button{
   border-width: 2px;
   border-style: double;
   border-color: azure;
-  width:50vw;
+  width:30vw;
   display: flex;
   flex-direction: column;
 }
@@ -114,6 +127,12 @@ button{
 .App-link {
   color: #61dafb;
 }
+.status{
+  position: sticky; top: 0; z-index: 100;
+  background-color: #c42121;
+  padding:30px;
+  color: #ffffff;
+}
 
 @keyframes App-logo-spin {
   from {
@@ -124,8 +143,17 @@ button{
   }
 }
 .title{
-  background-color: #f1efef;
-  color: #ff0078;
+  background-color: #c42121;
+    color: #efe4e9;
+}
+hr{
+  width: 100%;
+    margin: auto;
+    padding: 2px;
+    background: #c42121;
+    margin-bottom: 10px;
+    margin-top: 10px;
+ 
 }
 .loader{
   background-color: #282c3428;
@@ -136,6 +164,9 @@ button{
   text-align: center;
   align-items: center;
   justify-content: center;
+}
+select{
+  padding:10px;
 }
 
 @media only screen and (max-width: 600px) {
