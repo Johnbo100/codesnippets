@@ -8,10 +8,7 @@ app.use(express.json())
 
 
 const db = mysql.createConnection({
-    user:'root',
-    host:'localhost',
-    password:'johnbo100',
-    database:'acsweb_snippetsapi'
+    
 })
 
 app.get('/',(req,res)=>{
@@ -28,5 +25,3 @@ app.get('/',(req,res)=>{
 
 app.listen()
 
-//acsweb_jkjsnippets
-//51+5)]}hMw}b
