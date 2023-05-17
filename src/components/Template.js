@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import axios from "axios";
 import Loader from "./Loader";
 import Clipboard from "clipboard";
+import { AiOutlineCopy} from 'react-icons/ai'
+import { GrDocumentUpdate } from 'react-icons/gr'
+import Tiptap from "./Tiptap";
+
 
 const Template = () => {
   const [params, setParams] = useState(null);
   const [data, setData] = useState(null);
   const [lang, setLang] = useState(null);
-  const [desc, setDesc] = useState(null);
-  const [code, setCode] = useState(null);
+  const [desc, setDesc] = useState("Enter your description");
+  const [code, setCode] = useState("Enter your code");
   const [status, setStatus] = useState("Nothing happening yet");
   const [unlock, setUnlock] = useState(false);
   const [showloading, setShowloading] = useState(false);
@@ -44,6 +49,7 @@ const Template = () => {
   }
 
   async function getdatabylanguage(event) {
+    setShowloading(true)
     setData(null);
     const lang = event.target.value;
     await axios
@@ -55,12 +61,13 @@ const Template = () => {
           : setStatus("No results");
       })
       .catch((error) => console.log(error));
+      setShowloading(false)
   }
 
   async function handleUpdate(id) {
     setStatus("Updating record...");
     setShowloading(true);
-    await axios
+    unlock && await axios
       .put(process.env.REACT_APP_UPDATE, {
           id: id,
           code: codeupdate,
@@ -138,7 +145,10 @@ const Template = () => {
         setStatus(response.data);
         setShowloading(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error)
+        setStatus(error)
+      })
   }
 
   async function alive() {
@@ -157,6 +167,28 @@ const Template = () => {
     getalllanguages();
   }, []);
 
+  const copyToClipboard = (e,text) => {
+    e.preventDefault()
+    const type = 'text/plain';
+    const blob = new Blob([text], {type});
+    const cdata = [new ClipboardItem({[type]: blob})];
+    navigator.clipboard.write(cdata).then(function() {
+      console.log('Copied to clipboard!');
+      console.log(cdata)
+      setStatus("Code copied to clipboard")
+    }, function() {
+      console.log('Failed to copy to clipboard.');
+    });
+  };
+  // const setcodevalue=(codesnip)=>{
+  //   console.log("codesnip:"+codesnip)  
+  //   const val="<p>";
+
+  //     val.concat(codesnip+"</p>")
+  //     console.log("val: "+val)
+  //     return val
+  // }
+
   return (
     <div>
       {showloading && <Loader />}
@@ -168,20 +200,26 @@ const Template = () => {
             placeholder="language"
             autoComplete="on"
             onChange={(e) => setLang(e.target.value)}
+            className="newlanguage"
+            title="Enter the type of language"
           />
           <textarea
             type="text"
-            placeholder="description"
+            placeholder={desc}
             onChange={(e) => setDesc(e.target.value)}
             rows="4"
             cols="50"
+            className="newdesc"
+            title="Enter your code description"
           />
           <textarea
             type="text"
-            placeholder="code"
+            placeholder={code}
             onChange={(e) => setCode(e.target.value.trimStart())}
             rows="4"
             cols="50"
+            className="newcode"
+            title="Enter your code example"
           />
           <button onClick={postdata}>Add New code snippet</button>
         </div>
@@ -202,11 +240,13 @@ const Template = () => {
             languages.map((val, key) => <option>{val.language}</option>)}
         </select>
         <h3>Filter snippets</h3>
+        Your edited code is"{code}
         <input
           type="text"
           className="getbyinput"
           placeholder="Filter by  code keyword"
           onChange={(e) => setParams(e.target.value)}
+          title="Filter by code keyword"
           onKeyPress={handlecodekeypress}
         />
 
@@ -215,6 +255,7 @@ const Template = () => {
           className="getbyinput"
           placeholder="Filter by  code description"
           onChange={(e) => setParams(e.target.value)}
+          title="Filter by description keyword"
           onKeyPress={handledesckeypress}
         />
       </div>
@@ -223,6 +264,7 @@ const Template = () => {
         <th>Language</th>
         <th>Description</th>
         <th>Code examples</th>
+        
         <tbody>
           {data !== null &&
             data.map((d, key) => {
@@ -237,16 +279,25 @@ const Template = () => {
                       defaultValue={d.description}
                     />
                   </td>
-                  <td>
-                    <textarea className="code" defaultValue={d.code} onChange={(e)=>setCodeupdate(e.target.value)} />
-                  </td>
-                  <td>
-                    
+                  <td className="codebtns">
+                    {/* <textarea className="code" defaultValue={d.code} onChange={(e)=>setCodeupdate(e.target.value)} /> */}
+                    <Tiptap content={d.code} setCodeupdate={setCodeupdate} handleUpdate={handleUpdate} did={d.id}/>
+                    {/* <Editor 
+                      
+                    value={d.code}
+                    defaultValue={d.code}
+                    onChange={(e)=>setCodeupdate(e.target.value)} />; */}
+
+
+                    {/* <button title="Copy code" className="dbtncopy" onClick={(e)=>copyToClipboard(e,d.code)}>
+                      <AiOutlineCopy />
+                    </button> */}
                     <button
-                      className="dbtn"
-                      onClick={() => unlock && handleUpdate(d.id)}
+                    title="Update code and description"
+                      className="dbtnupdate"
+                      onClick={() => handleUpdate(d.id)}
                     >
-                      Update
+                      <GrDocumentUpdate />
                     </button>
                   </td>
                 </tr>
@@ -259,3 +310,6 @@ const Template = () => {
 };
 
 export default Template;
+
+
+

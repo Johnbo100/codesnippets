@@ -1,14 +1,17 @@
 import React from 'react'
-import spinner from '../spinner.svg'
+
 <spinner className="svg"></spinner>
+
+
 
 const Loader = () => {
   return (
-    <div className='loader'>
-        <h1>Please wait</h1>
-        <div className='App-logo'><img src={spinner}/></div>
+    <div className="loader">
+      <svg className="circular" viewBox="25 25 50 50">
+        <circle className="path" cx="50" cy="50" r="20" fill="none" strokeWidth="2" strokeMiterlimit="10" />
+      </svg>
     </div>
-  )
-}
+  );
+};
 
-export default Loader
+export default Loader;
