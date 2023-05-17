@@ -67,10 +67,25 @@ const Template = () => {
   async function handleUpdate(id) {
     setStatus("Updating record...");
     setShowloading(true);
-    unlock && await axios
+    await axios
       .put(process.env.REACT_APP_UPDATE, {
           id: id,
           code: codeupdate,
+          desc: '',
+      })
+      .then((response) => {
+        setStatus("Record updated");
+      })
+      .catch((error) => console.log(error));
+    setShowloading(false);
+  }
+
+  async function handledescUpdate(id) {
+    setStatus("Updating record...");
+    setShowloading(true);
+    await axios
+      .put(process.env.REACT_APP_UPDATEDESC, {
+          id: id,
           desc: descupdate,
       })
       .then((response) => {
@@ -167,28 +182,8 @@ const Template = () => {
     getalllanguages();
   }, []);
 
-  const copyToClipboard = (e,text) => {
-    e.preventDefault()
-    const type = 'text/plain';
-    const blob = new Blob([text], {type});
-    const cdata = [new ClipboardItem({[type]: blob})];
-    navigator.clipboard.write(cdata).then(function() {
-      console.log('Copied to clipboard!');
-      console.log(cdata)
-      setStatus("Code copied to clipboard")
-    }, function() {
-      console.log('Failed to copy to clipboard.');
-    });
-  };
-  // const setcodevalue=(codesnip)=>{
-  //   console.log("codesnip:"+codesnip)  
-  //   const val="<p>";
-
-  //     val.concat(codesnip+"</p>")
-  //     console.log("val: "+val)
-  //     return val
-  // }
-
+  
+console.log("descupdate from template: "+descupdate)
   return (
     <div>
       {showloading && <Loader />}
@@ -271,31 +266,29 @@ const Template = () => {
               return (
                 <tr>
                   <td className="dlanguage">{d.language}</td>
-                  <td>
+                  <td className="">
                     <textarea
                       type="text"
                       className="description"
                       onChange={(e) => setDescupdate(e.target.value)}
                       defaultValue={d.description}
                     />
+                    <button
+                    title="Update code and description"
+                      className="desc-update-btn"
+                      onClick={() => unlock && handledescUpdate(d.id)}
+                    >
+                      <GrDocumentUpdate />
+                    </button>
                   </td>
                   <td className="codebtns">
                     {/* <textarea className="code" defaultValue={d.code} onChange={(e)=>setCodeupdate(e.target.value)} /> */}
-                    <Tiptap content={d.code} setCodeupdate={setCodeupdate} handleUpdate={handleUpdate} did={d.id}/>
-                    {/* <Editor 
-                      
-                    value={d.code}
-                    defaultValue={d.code}
-                    onChange={(e)=>setCodeupdate(e.target.value)} />; */}
-
-
-                    {/* <button title="Copy code" className="dbtncopy" onClick={(e)=>copyToClipboard(e,d.code)}>
-                      <AiOutlineCopy />
-                    </button> */}
+                    <Tiptap content={d.code} setCodeupdate={setCodeupdate} codeupdate={codeupdate} descupdate={descupdate} />
+                   
                     <button
                     title="Update code and description"
                       className="dbtnupdate"
-                      onClick={() => handleUpdate(d.id)}
+                      onClick={() => unlock && handleUpdate(d.id)}
                     >
                       <GrDocumentUpdate />
                     </button>

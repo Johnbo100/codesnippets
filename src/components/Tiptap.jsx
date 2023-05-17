@@ -197,7 +197,9 @@ const Tiptap = (props) => {
     onUpdate: ({ editor }) => {
         const html = editor.getHTML()
         props.setCodeupdate(html)
-        console.log("The json:"+html)
+        console.log("New code: "+html)
+        console.log("codeupdate: "+props.codeupdate)
+        console.log("descupdate: "+props.descupdate)
     }
   })
 

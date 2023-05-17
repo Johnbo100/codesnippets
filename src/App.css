@@ -101,6 +101,11 @@ button{
     font-family: serif;
     font-size: large;
     height: 200px;
+    position: relative;
+}
+.desc-update-btn{
+  position: absolute;
+  left: 32%;
 }
 
 .inputcontainer{
