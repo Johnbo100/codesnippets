@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import Loader from "./Loader";
@@ -20,6 +20,8 @@ const Template = () => {
   const [languages, setLanguages] = useState(null);
   const [descupdate,setDescupdate]=useState('')
   const [codeupdate,setCodeupdate]=useState('')
+
+  
 
 
   async function getdata() {
@@ -176,6 +178,7 @@ const Template = () => {
   }
   const handlelock = () => {
     unlock ? setUnlock(false) : setUnlock(true);
+    
   };
   useEffect(() => {
     alive();
@@ -224,7 +227,7 @@ console.log("descupdate from template: "+descupdate)
           <span id="lbtn" onClick={handlelock}>
             ----
           </span>
-          Status:{status}
+          Status:{status}----
         </div>
       </div>
       <hr />
@@ -235,7 +238,7 @@ console.log("descupdate from template: "+descupdate)
             languages.map((val, key) => <option>{val.language}</option>)}
         </select>
         <h3>Filter snippets</h3>
-        Your edited code is"{code}
+        
         <input
           type="text"
           className="getbyinput"
@@ -274,9 +277,13 @@ console.log("descupdate from template: "+descupdate)
                       defaultValue={d.description}
                     />
                     <button
-                    title="Update code and description"
+                    title="Update description"
                       className="desc-update-btn"
                       onClick={() => unlock && handledescUpdate(d.id)}
+                      style={{
+                        // backgroundColor: unlock ? "red" : "green",
+                        backgroundImage: unlock ? "linear-gradient(to right, #433939, #19e10f)" : "Linear-gradient(to right, #433939, #9d9d93)",
+                      }}
                     >
                       <GrDocumentUpdate />
                     </button>
@@ -286,9 +293,13 @@ console.log("descupdate from template: "+descupdate)
                     <Tiptap content={d.code} setCodeupdate={setCodeupdate} codeupdate={codeupdate} descupdate={descupdate} />
                    
                     <button
-                    title="Update code and description"
+                    title="Update code"
                       className="dbtnupdate"
                       onClick={() => unlock && handleUpdate(d.id)}
+                      style={{
+                        // background: unlock ? "red" : "green",
+                        backgroundImage: unlock ? "linear-gradient(to right, #433939, #19e10f)" : "linear-gradient(to right, #433939, #9d9d93)",
+                      }}
                     >
                       <GrDocumentUpdate />
                     </button>

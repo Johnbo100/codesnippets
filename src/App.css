@@ -25,12 +25,23 @@
 }
 button{
   border-radius: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin: 0px;
-    background: #000000b5;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+    /* margin: 0px; */
+    background: #256c44;
     color: white;
-    padding: 5px
+    padding: 5px;
+    background-image: linear-gradient(to right, #433939, #9d9d93);
+    cursor:pointer;
+}
+button:hover{
+  border-radius: 5px;
+  background-image: linear-gradient(to right, #433939, #d8d817);
+}
+button:active{
+  background-image: linear-gradient(to right, #2ae719, #3ad80e);
+  border-radius: 0px;
 }
 .codeblock{
   display: flex;
@@ -52,7 +63,7 @@ button{
 }
 .codebtns{
   position:absolute;
-  background: #000000;
+  background: #697e91;
 }
 .lang{
   max-width: 10vw;
@@ -82,7 +93,7 @@ button{
     right: 0;
     top: 20%;
     height: 20%;
-    background: #3cb37199;
+    
     font-size: 20px;
     left: 85%;
 }
@@ -96,7 +107,7 @@ button{
     border: #282c34;
     border-width: 2px;
     border-style: groove;
-    background-color: #f4ecf0;
+    
     color: #1c1a1a;
     font-family: serif;
     font-size: large;
@@ -116,6 +127,7 @@ button{
   border-style: double;
   border-color: azure;
   width:100vw;
+  background-color: #9a9ea2;
 }
 
 .displayrecs{
@@ -152,20 +164,20 @@ button{
 }
 .status{
   position: sticky; top: 0; z-index: 100;
-  background-color: #c42121;
+  background-color: #1434539e;
   padding:30px;
   color: #ffffff;
 }
 
 .title{
-  background-color: #c42121;
+  background-color: #1434539e;
     color: #efe4e9;
 }
 hr{
   width: 100%;
     margin: auto;
     padding: 2px;
-    background: #c42121;
+    background: #9a9ea29e;
     margin-bottom: 10px;
     margin-top: 10px;
  
@@ -323,8 +335,8 @@ table td:first-child {
     border-top: 2px solid #0D0D0D;
     margin: 2rem 0;
   }
-  .ProseMirror > button{
+  .editor.isActive{
     background: #ffffffb5;
-    color: #100f0f;
+    color: #e4e415;
     padding: 0 20px 0 20px;
   }

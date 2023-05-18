@@ -6,7 +6,7 @@ import Login from './components/Login';
 function App() {
   return (
     <div className="App">
-      <h1 className='title'>Code Snippet App</h1>
+      <h1 className='title'>CODE SNIPPETS</h1>
         <Login/>
         
     </div>  
